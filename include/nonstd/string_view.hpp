@@ -873,7 +873,8 @@ public:
     nssv_constexpr14 size_type find( basic_string_view v, size_type pos = 0 ) const nssv_noexcept  // (1)
     {
         return assert( v.size() == 0 || v.data() != nssv_nullptr )
-            , pos >= size()
+            , v.empty() && pos <= size() ? pos
+            : pos >= size()
             ? npos : to_pos(
 #if nssv_CPP11_OR_GREATER && ! nssv_CPP17_OR_GREATER
                 detail::search( substr(pos), v )
