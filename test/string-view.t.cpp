@@ -584,7 +584,7 @@ CASE( "string_view: Allows to search for a C-string substring, starting at posit
     EXPECT( sv.find("world", 7 ) == string_view::npos );
 }
 
-CASE( "string_view: Finds empty substrings through size() via find()" )
+CASE( "string_view: Allows to find empty substrings through size() via find()" )
 {
     string_view views[] = { string_view(), string_view(""), string_view("abc") };
 
@@ -598,10 +598,10 @@ CASE( "string_view: Finds empty substrings through size() via find()" )
             size_type pos = positions[j];
             size_type expected = pos <= sv.size() ? pos : string_view::npos;
 
-            EXPECT( sv.find( string_view(), pos ) == expected );
-            EXPECT( sv.find( string_view(""), pos ) == expected );
-            EXPECT( sv.find( "", pos ) == expected );
-            EXPECT( sv.find( "ignored", pos, 0 ) == expected );
+            EXPECT( sv.find( string_view(  ), pos    ) == expected );
+            EXPECT( sv.find( string_view(""), pos    ) == expected );
+            EXPECT( sv.find(             "" , pos    ) == expected );
+            EXPECT( sv.find(      "ignored" , pos, 0 ) == expected );
         }
     }
 }
@@ -610,34 +610,34 @@ CASE( "string_view: Does not find nonempty substrings at or past size() via find
 {
     string_view sv("abc");
 
-    EXPECT( sv.find( string_view("c"), sv.size() ) == string_view::npos );
-    EXPECT( sv.find( "c", sv.size() ) == string_view::npos );
-    EXPECT( sv.find( "c", sv.size(), 1 ) == string_view::npos );
-    EXPECT( sv.find( 'c', sv.size() ) == string_view::npos );
-    EXPECT( sv.find( "c", sv.size() + 1 ) == string_view::npos );
-    EXPECT( sv.find( "c", string_view::npos ) == string_view::npos );
+    EXPECT( sv.find( string_view("c"), sv.size()         ) == string_view::npos );
+    EXPECT( sv.find(             "c" , sv.size()         ) == string_view::npos );
+    EXPECT( sv.find(             "c" , sv.size(), 1      ) == string_view::npos );
+    EXPECT( sv.find(             'c' , sv.size()         ) == string_view::npos );
+    EXPECT( sv.find(             "c" , sv.size() + 1     ) == string_view::npos );
+    EXPECT( sv.find(             "c" , string_view::npos ) == string_view::npos );
 }
 
-CASE( "string_view: Finds empty wide substrings at size() via find()" )
+CASE( "string_view: Allows to find empty wide substrings at size() via find()" )
 {
     nonstd::wstring_view sv(L"abc", 3);
 
-    EXPECT( nonstd::wstring_view().find( nonstd::wstring_view() ) == size_type( 0 ) );
-    EXPECT( sv.find( nonstd::wstring_view(), sv.size() ) == sv.size() );
-    EXPECT( sv.find( L"", sv.size() ) == sv.size() );
-    EXPECT( sv.find( L"ignored", sv.size(), 0 ) == sv.size() );
-    EXPECT( sv.find( L"", sv.size() + 1 ) == nonstd::wstring_view::npos );
+    EXPECT( nonstd::wstring_view().find( nonstd::wstring_view()                ) == size_type( 0 ) );
+    EXPECT(                     sv.find( nonstd::wstring_view(), sv.size()     ) == sv.size()      );
+    EXPECT(                     sv.find(                    L"", sv.size()     ) == sv.size()      );
+    EXPECT(                     sv.find(             L"ignored", sv.size(), 0  ) == sv.size()      );
+    EXPECT(                     sv.find(                    L"", sv.size() + 1 ) == nonstd::wstring_view::npos );
 }
 
 CASE( "string_view: Allows to constexpr-find empty substrings via find() (C++14)" )
 {
 #if nssv_STD_SV_OR( nssv_HAVE_CONSTEXPR_14 )
-    static_assert( string_view().find( string_view() ) == 0, "" );
-    static_assert( string_view( "abc" ).find( string_view(), 3 ) == 3, "" );
-    static_assert( string_view( "abc" ).find( "", 3 ) == 3, "" );
-    static_assert( string_view( "abc" ).find( "ignored", 3, 0 ) == 3, "" );
-    static_assert( string_view( "abc" ).find( "", 4 ) == string_view::npos, "" );
-    static_assert( string_view( "abc" ).find( "", string_view::npos ) == string_view::npos, "" );
+    static_assert( string_view(       ).find( string_view()       ) == 0, "" );
+    static_assert( string_view( "abc" ).find( string_view(), 3    ) == 3, "" );
+    static_assert( string_view( "abc" ).find(            "", 3    ) == 3, "" );
+    static_assert( string_view( "abc" ).find(     "ignored", 3, 0 ) == 3, "" );
+    static_assert( string_view( "abc" ).find(            "", 4                 ) == string_view::npos, "" );
+    static_assert( string_view( "abc" ).find(            "", string_view::npos ) == string_view::npos, "" );
 #else
     EXPECT( !!"C++14 constexpr is not available (no C++14)" );
 #endif
@@ -822,7 +822,7 @@ CASE( "string_view: Allows to search for the first character not equal to the sp
     EXPECT( sv.find_first_not_of('d', 10 ) == string_view::npos );
 }
 
-CASE( "string_view: Allows to search for  the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_first_not_of(), (3)" )
+CASE( "string_view: Allows to search for the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_first_not_of(), (3)" )
 {
     char hello[] = "hello world";
     string_view sv( hello );
@@ -836,7 +836,7 @@ CASE( "string_view: Allows to search for  the first character not equal to any o
     EXPECT( sv.find_first_not_of( "he"     , 0, 1     ) == size_type(  1 ) );
 }
 
-CASE( "string_view: Allows to search for  the first character not equal to any of the characters specified in a C-string, starting at position pos via find_first_not_of(), (4)" )
+CASE( "string_view: Allows to search for the first character not equal to any of the characters specified in a C-string, starting at position pos via find_first_not_of(), (4)" )
 {
     char hello[] = "hello world";
     string_view sv( hello );
@@ -879,7 +879,7 @@ CASE( "string_view: Allows to search backwards for the first character not equal
     EXPECT( sv.find_last_not_of('d',  0 ) == size_type( 0 ) );
 }
 
-CASE( "string_view: Allows to search backwards for  the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_last_not_of(), (3)" )
+CASE( "string_view: Allows to search backwards for the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_last_not_of(), (3)" )
 {
     char hello[] = "hello world";
     string_view sv( hello );
@@ -893,7 +893,7 @@ CASE( "string_view: Allows to search backwards for  the first character not equa
     EXPECT( sv.find_last_not_of( "x"             ) == size_type( 10 ) );
 }
 
-CASE( "string_view: Allows to search backwards for  the first character not equal to any of the characters specified in a C-string, starting at position pos via find_last_not_of(), (4)" )
+CASE( "string_view: Allows to search backwards for the first character not equal to any of the characters specified in a C-string, starting at position pos via find_last_not_of(), (4)" )
 {
     char hello[] = "hello world";
     string_view sv( hello );

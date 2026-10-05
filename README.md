@@ -357,9 +357,9 @@ string_view: Allows to search for a string_view substring, starting at position 
 string_view: Allows to search for a character, starting at position pos (default: 0) via find(), (2)
 string_view: Allows to search for a C-string substring, starting at position pos and of length n via find(), (3)
 string_view: Allows to search for a C-string substring, starting at position pos (default: 0) via find(), (4)
-string_view: Finds empty substrings through size() via find()
+string_view: Allows to find empty substrings through size() via find()
 string_view: Does not find nonempty substrings at or past size() via find()
-string_view: Finds empty wide substrings at size() via find()
+string_view: Allows to find empty wide substrings at size() via find()
 string_view: Allows to constexpr-find empty substrings via find() (C++14)
 string_view: Allows to search backwards for a string_view substring, starting at position pos (default: npos) via rfind(), (1)
 string_view: Allows to search backwards for a character, starting at position pos (default: npos) via rfind(), (2)
@@ -375,12 +375,12 @@ string_view: Allows to search backwards for the first occurrence of any of the c
 string_view: Allows to search backwards for the first occurrence of any of the characters specified in a C-string, starting at position pos via find_last_of(), (4)
 string_view: Allows to search for the first character not specified in a string view, starting at position pos (default: 0) via find_first_not_of(), (1)
 string_view: Allows to search for the first character not equal to the specified character, starting at position pos (default: 0) via find_first_not_of(), (2)
-string_view: Allows to search for  the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_first_not_of(), (3)
-string_view: Allows to search for  the first character not equal to any of the characters specified in a C-string, starting at position pos via find_first_not_of(), (4)
+string_view: Allows to search for the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_first_not_of(), (3)
+string_view: Allows to search for the first character not equal to any of the characters specified in a C-string, starting at position pos via find_first_not_of(), (4)
 string_view: Allows to search backwards for the first character not specified in a string view, starting at position pos (default: npos) via find_last_not_of(), (1)
 string_view: Allows to search backwards for the first character not equal to the specified character, starting at position pos (default: npos) via find_last_not_of(), (2)
-string_view: Allows to search backwards for  the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_last_not_of(), (3)
-string_view: Allows to search backwards for  the first character not equal to any of the characters specified in a C-string, starting at position pos via find_last_not_of(), (4)
+string_view: Allows to search backwards for the first character not equal to any of the characters specified in a C-string, starting at position pos and of length n via find_last_not_of(), (3)
+string_view: Allows to search backwards for the first character not equal to any of the characters specified in a C-string, starting at position pos via find_last_not_of(), (4)
 string_view: Allows to create a string_view, wstring_view, u16string_view, u32string_view via literal "sv"
 string_view: Allows to create a string_view via literal "sv", using namespace nonstd::literals::string_view_literals
 string_view: Allows to create a string_view via literal "sv", using namespace nonstd::string_view_literals
