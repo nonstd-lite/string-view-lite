@@ -266,8 +266,8 @@ CASE( "string_view: Throws at observing an element via at() with an index of siz
 {
     string_view sv("hello");
 
-    EXPECT_THROWS(   sv.at( sv.size()     ) );
-    EXPECT_NO_THROW( sv.at( sv.size() - 1 ) );
+    EXPECT_THROWS(   (void) sv.at( sv.size()     ) );
+    EXPECT_NO_THROW( (void) sv.at( sv.size() - 1 ) );
 }
 
 CASE( "string_view: Allows to observe elements via data()" )
@@ -387,8 +387,8 @@ CASE( "string_view: Throws if requested position of substr() exceeds string_view
 {
     string_view sv("hello world");
 
-    EXPECT_THROWS(   sv.substr( sv.size() + 1 ) );
-    EXPECT_NO_THROW( sv.substr( sv.size() + 0 ) );
+    EXPECT_THROWS(   (void) sv.substr( sv.size() + 1 ) );
+    EXPECT_NO_THROW( (void) sv.substr( sv.size() + 0 ) );
 }
 
 CASE( "string_view: Allows to lexically compare to another string_view via compare(), (1)" )
